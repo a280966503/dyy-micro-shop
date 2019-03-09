@@ -41,7 +41,7 @@ type Spec struct {
 }
 
 type TbSpecification struct {
-	Id			int		`json:"id"`
+	Id			int64		`json:"id"`
 	SpecName 	string `json:"specName"`
 }
 
@@ -134,7 +134,9 @@ func init() {
 
 	// register model
 	orm.RegisterModel(
+		new(TbBrand),
 		new(TbSeller),
+		new(TbSpecification),
 	)
 
 	// create table
