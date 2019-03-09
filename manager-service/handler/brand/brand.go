@@ -47,7 +47,6 @@ func (h *Brand) Search(ctx context.Context, in *brand.ReqBrand, out *brand.RespB
 		o.Raw("SELECT count(id) FROM tb_brand").
 			QueryRow(&count)
 	}
-	fmt.Println(count)
 	*out = brand.RespBrand{Total:count}
 
 	for _,value := range brands{
@@ -58,7 +57,6 @@ func (h *Brand) Search(ctx context.Context, in *brand.ReqBrand, out *brand.RespB
 		}
 		out.Rows=append(out.Rows,&brand)
 	}
-	fmt.Println(out)
 	return nil
 }
 
@@ -93,4 +91,39 @@ func (h *Brand) FindById(ctx context.Context, in *brand.Rows, out *brand.Rows) e
 	}
 	return nil
 
+}
+
+//{flag:true,message:""}
+func (h *Brand) Delete(ctx context.Context, in *brand.ReqIds, out *brand.Resp) error {
+
+	o := orm.NewOrm()
+
+	for _,value :=range in.Ids {
+		_, err := o.Raw("DELETE FROM tb_brand WHERE id=?", value).Exec()
+		if err!=nil {
+			fmt.Println(err)
+			return err
+		}
+	}
+
+	*out=brand.Resp{Flag:true,Message:"删除成功"}
+	return nil
+}
+
+//UPDATE Person SET Address = 'Zhongshan 23', City = 'Nanjing' WHERE LastName = 'Wilson'
+//{flag:true,message:""}
+func (h *Brand) Update(ctx context.Context, in *brand.Rows, out *brand.Resp) error {
+	o := orm.NewOrm()
+	fmt.Println(in)
+
+	_, err := o.Raw("UPDATE tb_brand SET name=?,first_char=? WHERE id =?", in.Name, in.FirstChar, in.Id).Exec()
+
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	*out=brand.Resp{Flag:true,Message:"更新成功"}
+
+	return nil
 }

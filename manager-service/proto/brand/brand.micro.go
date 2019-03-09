@@ -9,6 +9,7 @@ It is generated from these files:
 
 It has these top-level messages:
 	ReqBrand
+	ReqIds
 	RespBrand
 	Rows
 	Resp
@@ -48,6 +49,8 @@ type BrandService interface {
 	Search(ctx context.Context, in *ReqBrand, opts ...client.CallOption) (*RespBrand, error)
 	Save(ctx context.Context, in *Rows, opts ...client.CallOption) (*Resp, error)
 	FindById(ctx context.Context, in *Rows, opts ...client.CallOption) (*Rows, error)
+	Delete(ctx context.Context, in *ReqIds, opts ...client.CallOption) (*Resp, error)
+	Update(ctx context.Context, in *Rows, opts ...client.CallOption) (*Resp, error)
 }
 
 type brandService struct {
@@ -98,6 +101,26 @@ func (c *brandService) FindById(ctx context.Context, in *Rows, opts ...client.Ca
 	return out, nil
 }
 
+func (c *brandService) Delete(ctx context.Context, in *ReqIds, opts ...client.CallOption) (*Resp, error) {
+	req := c.c.NewRequest(c.name, "Brand.Delete", in)
+	out := new(Resp)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *brandService) Update(ctx context.Context, in *Rows, opts ...client.CallOption) (*Resp, error) {
+	req := c.c.NewRequest(c.name, "Brand.Update", in)
+	out := new(Resp)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Brand service
 
 type BrandHandler interface {
@@ -105,6 +128,8 @@ type BrandHandler interface {
 	Search(context.Context, *ReqBrand, *RespBrand) error
 	Save(context.Context, *Rows, *Resp) error
 	FindById(context.Context, *Rows, *Rows) error
+	Delete(context.Context, *ReqIds, *Resp) error
+	Update(context.Context, *Rows, *Resp) error
 }
 
 func RegisterBrandHandler(s server.Server, hdlr BrandHandler, opts ...server.HandlerOption) error {
@@ -112,6 +137,8 @@ func RegisterBrandHandler(s server.Server, hdlr BrandHandler, opts ...server.Han
 		Search(ctx context.Context, in *ReqBrand, out *RespBrand) error
 		Save(ctx context.Context, in *Rows, out *Resp) error
 		FindById(ctx context.Context, in *Rows, out *Rows) error
+		Delete(ctx context.Context, in *ReqIds, out *Resp) error
+		Update(ctx context.Context, in *Rows, out *Resp) error
 	}
 	type Brand struct {
 		brand
@@ -134,4 +161,12 @@ func (h *brandHandler) Save(ctx context.Context, in *Rows, out *Resp) error {
 
 func (h *brandHandler) FindById(ctx context.Context, in *Rows, out *Rows) error {
 	return h.BrandHandler.FindById(ctx, in, out)
+}
+
+func (h *brandHandler) Delete(ctx context.Context, in *ReqIds, out *Resp) error {
+	return h.BrandHandler.Delete(ctx, in, out)
+}
+
+func (h *brandHandler) Update(ctx context.Context, in *Rows, out *Resp) error {
+	return h.BrandHandler.Update(ctx, in, out)
 }

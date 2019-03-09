@@ -5,6 +5,8 @@ service Brand{
     rpc Search(ReqBrand)returns(RespBrand){}
     rpc Save(Rows)returns(Resp){}
     rpc FindById(Rows)returns(Rows){}
+    rpc Delete(ReqIds)returns(Resp){}
+    rpc Update(Rows)returns(Resp){}
 
 
 }
@@ -22,6 +24,10 @@ message ReqBrand{
     int32 rows      =2;
     string name     =3;
     string firstChar =4;
+}
+
+message ReqIds{
+    repeated string ids=1;
 }
 
 //{total:100,rows:[{id:1,name:234,firstChar:N,firstName:2}]}

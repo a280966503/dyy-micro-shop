@@ -6,6 +6,7 @@ service Brand{
     rpc Save(Rows)returns(Resp){}
     rpc FindById(Rows)returns(Rows){}
     rpc Delete(ReqIds)returns(Resp){}
+    rpc Update(Rows)returns(Resp){}
 
 
 }

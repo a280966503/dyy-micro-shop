@@ -181,3 +181,45 @@ func Delete(w http.ResponseWriter,r *http.Request)  {
 	//会写数据
 	w.Write(resp)
 }
+
+/**
+--request
+{"id":21,"name":"康佳","firstChar":"KD"}
+
+--response
+{flag:true,message:""}
+ */
+func Update(w http.ResponseWriter,r *http.Request)  {
+	body, _ := ioutil.ReadAll(r.Body)
+
+	var info brand.Rows
+
+	json.Unmarshal(body,&info)
+
+	service := micro.NewService()
+
+	service.Init()
+
+	brandService := brand.NewBrandService(
+		utils.SERVICE_MANAGER_SERVICE,
+		service.Client(),
+	)
+
+	respBrand, err := brandService.Update(
+		context.TODO(),
+		&info,
+	)
+
+	if err != nil {
+		fmt.Println("=========",err)
+		return
+	}
+
+	//转码为json
+	resp, _ := json.Marshal(respBrand)
+
+	//告诉前端数据类型
+	w.Header().Set("Content-Type", "application/json")
+	//会写数据
+	w.Write(resp)
+}

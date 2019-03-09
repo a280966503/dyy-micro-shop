@@ -20,6 +20,7 @@ func Init(service web.Service) {
 	service.Handle("/brand/save.do",http.HandlerFunc(brand.Save))
 	service.Handle("/brand/findById.do",http.HandlerFunc(brand.FindById))
 	service.Handle("/brand/delete.do",http.HandlerFunc(brand.Delete))
+	service.Handle("/brand/update.do",http.HandlerFunc(brand.Update))
 
 
 

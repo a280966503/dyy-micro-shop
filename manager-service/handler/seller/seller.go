@@ -119,7 +119,7 @@ func (c *Seller) FindOne(ctx context.Context, in *seller.ReqId, out *seller.Rows
 	return nil
 
 }
-//UPDATE Person SET Address = 'Zhongshan 23', City = 'Nanjing'
+
 //WHERE LastName = 'Wilson'
 func (c *Seller) UpdateStatus(ctx context.Context, in *seller.ReqIdAndStatus, out *seller.RespReturn) error {
 	o := orm.NewOrm()
