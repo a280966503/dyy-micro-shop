@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+service TypeTemplate{
+
+    rpc Search(ReqSearch)returns(RespSearch){}
+    rpc Add(Rows)returns(Resp){}
+    rpc Delete(ReqIds)returns(Resp){}
+    rpc FindOne(Rows)returns(Rows){}
+    rpc Update(Rows)returns(Resp){}
+
+
+}
+/**
+--response
+response.rows;//结果
+respons
+--requeste.total;//更新总记录数
+
+seller/search.do?page=1&rows=10
+{status: "0"}
+ */
+message ReqSearch{
+    int32 page      =1;
+    int32 rows      =2;
+}
+
+message ReqIds{
+    repeated string ids=1;
+}
+
+//{total:100,rows:[{id:1,name:234,firstChar:N,firstName:2}]}
+message RespSearch{
+
+    sint64 total = 1;
+
+    repeated Rows rows = 2;
+}
+
+//{"customAttributeItems":[{"text":"1"},{"text":"1"}],"name":"1","brandIds":[{"id":2,"text":"华为"}],"specIds":[{"id":33,"text":"电视屏幕尺寸1"}]}
+message Rows{
+    sint64 id                       =1;
+    string name                     =2;
+
+    string specIds                  =3;
+    string brandIds                 =4;
+
+    string customAttributeItems     =5;
+    string sspecIds                 =6;
+}
+
+message Models{
+    sint64 id =1;
+    string text = 2;
+}
+
+message Resp{
+    bool flag = 1;
+    string message = 2;
+}
+
+

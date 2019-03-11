@@ -160,3 +160,29 @@ func (h *Specification) Update(ctx context.Context, in *specification.ReqAdd, ou
 	return nil
 
 }
+
+func (h *Specification) SelectOptionList(ctx context.Context, in *specification.Req, out *specification.OptionList) error {
+
+	var models []specification.Rows
+
+	o := orm.NewOrm()
+
+	_, err := o.Raw("SELECT id,spec_name FROM tb_specification").QueryRows(&models)
+
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	var returnModels []*specification.Model
+
+	for _,value := range models{
+
+		model := specification.Model{Id: value.Id, Text: value.SpecName}
+		returnModels = append(returnModels,&model)
+	}
+
+	*out = specification.OptionList{OptionList:returnModels}
+
+	return nil
+}

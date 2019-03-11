@@ -218,3 +218,37 @@ func Update(w http.ResponseWriter,r *http.Request)  {
 	//会写数据
 	w.Write(resp)
 }
+
+/**
+--response
+[{"id":1,"text":"联想"},{"id":3,"text":"三星"}]
+ */
+func SelectOptionList(w http.ResponseWriter,r *http.Request)  {
+
+	service := micro.NewService()
+
+	service.Init()
+
+	specificationService := specification.NewSpecificationService(
+		utils.SERVICE_MANAGER_SERVICE,
+		service.Client(),
+		)
+
+	respBrand, err := specificationService.SelectOptionList(
+		context.TODO(),
+		&specification.Req{},
+	)
+
+	if err != nil {
+		fmt.Println("=========",err)
+		return
+	}
+
+	//转码为json
+	resp, _ := json.Marshal(respBrand.OptionList)
+
+	//告诉前端数据类型
+	w.Header().Set("Content-Type", "application/json")
+	//会写数据
+	w.Write(resp)
+}

@@ -13,6 +13,9 @@ It has these top-level messages:
 	RespSearch
 	ReqAdd
 	Rows
+	Req
+	OptionList
+	Model
 	Resp
 */
 package specification
@@ -52,6 +55,7 @@ type SpecificationService interface {
 	Delete(ctx context.Context, in *ReqIds, opts ...client.CallOption) (*Resp, error)
 	FindOne(ctx context.Context, in *Rows, opts ...client.CallOption) (*ReqAdd, error)
 	Update(ctx context.Context, in *ReqAdd, opts ...client.CallOption) (*Resp, error)
+	SelectOptionList(ctx context.Context, in *Req, opts ...client.CallOption) (*OptionList, error)
 }
 
 type specificationService struct {
@@ -122,6 +126,16 @@ func (c *specificationService) Update(ctx context.Context, in *ReqAdd, opts ...c
 	return out, nil
 }
 
+func (c *specificationService) SelectOptionList(ctx context.Context, in *Req, opts ...client.CallOption) (*OptionList, error) {
+	req := c.c.NewRequest(c.name, "Specification.SelectOptionList", in)
+	out := new(OptionList)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Specification service
 
 type SpecificationHandler interface {
@@ -131,6 +145,7 @@ type SpecificationHandler interface {
 	Delete(context.Context, *ReqIds, *Resp) error
 	FindOne(context.Context, *Rows, *ReqAdd) error
 	Update(context.Context, *ReqAdd, *Resp) error
+	SelectOptionList(context.Context, *Req, *OptionList) error
 }
 
 func RegisterSpecificationHandler(s server.Server, hdlr SpecificationHandler, opts ...server.HandlerOption) error {
@@ -140,6 +155,7 @@ func RegisterSpecificationHandler(s server.Server, hdlr SpecificationHandler, op
 		Delete(ctx context.Context, in *ReqIds, out *Resp) error
 		FindOne(ctx context.Context, in *Rows, out *ReqAdd) error
 		Update(ctx context.Context, in *ReqAdd, out *Resp) error
+		SelectOptionList(ctx context.Context, in *Req, out *OptionList) error
 	}
 	type Specification struct {
 		specification
@@ -170,4 +186,8 @@ func (h *specificationHandler) FindOne(ctx context.Context, in *Rows, out *ReqAd
 
 func (h *specificationHandler) Update(ctx context.Context, in *ReqAdd, out *Resp) error {
 	return h.SpecificationHandler.Update(ctx, in, out)
+}
+
+func (h *specificationHandler) SelectOptionList(ctx context.Context, in *Req, out *OptionList) error {
+	return h.SpecificationHandler.SelectOptionList(ctx, in, out)
 }

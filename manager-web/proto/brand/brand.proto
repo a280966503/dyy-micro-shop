@@ -7,6 +7,7 @@ service Brand{
     rpc FindById(Rows)returns(Rows){}
     rpc Delete(ReqIds)returns(Resp){}
     rpc Update(Rows)returns(Resp){}
+    rpc SelectOptionList(Req) returns(OptionList){}
 
 
 }
@@ -39,12 +40,24 @@ message RespBrand{
 }
 
 
+message OptionList{
+    repeated Model optionList=1;
+}
+
+message Model{
+    sint64 id = 1;
+    string text = 2;
+}
+
+
 
 message Rows{
     sint64 id =1;
     string name =2;
     string firstChar = 3;
 }
+
+message Req{}
 
 message Resp{
     bool flag = 1;

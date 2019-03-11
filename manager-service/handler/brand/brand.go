@@ -127,3 +127,29 @@ func (h *Brand) Update(ctx context.Context, in *brand.Rows, out *brand.Resp) err
 
 	return nil
 }
+
+func (h *Brand) SelectOptionList(ctx context.Context, in *brand.Req, out *brand.OptionList) error {
+
+	var models []brand.Rows
+
+	o := orm.NewOrm()
+
+	_, err := o.Raw("SELECT id,name FROM tb_brand").QueryRows(&models)
+
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	var returnModels []*brand.Model
+
+	for _,value := range models{
+
+		model := brand.Model{Id: value.Id, Text: value.Name}
+		returnModels = append(returnModels,&model)
+	}
+
+	*out = brand.OptionList{OptionList:returnModels}
+
+	return nil
+}
