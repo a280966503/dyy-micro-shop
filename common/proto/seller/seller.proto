@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+service Seller{
+    //    rpc MicroSeller(ReqSeller)returns(RespSeller){}
+    rpc Search(ReqSeller)returns(RespSeller){}
+    rpc FindOne(ReqId)returns(Rows){}
+    rpc UpdateStatus(ReqIdAndStatus)returns(RespReturn){}
+
+}
+/**
+--response
+response.rows;//结果
+respons
+--requeste.total;//更新总记录数
+
+seller/search.do?page=1&rows=10
+{status: "0"}
+ */
+message ReqSeller{
+    int32 page      =1;
+    int32 rows      =2;
+    string status   =3;
+}
+
+message RespSeller{
+
+    sint64 total = 1;
+
+    repeated Rows rows = 2;
+}
+
+message ReqId{
+    string id =1;
+}
+
+message Rows{
+    string  sellerId 			=1;
+    string  name 				=2;
+    string  nickName 			=3;
+    string  password 			=4;
+    string  email 				=5;
+    string  mobile 				=6;
+    string  telephone 			=7;
+    string  status 				=8;
+    string  addressDetail 		=9;
+    string  linkmanName 		=10;
+    string  linkmanQq 			=11;
+    string  linkmanMobile		=12;
+    string  linkmanEmail		=13;
+    string  licenseNumber		=14;
+    string  taxNumber			=15;
+    string  orgNumber			=16;
+    sint64   address			=17;
+    string  logoPic				=18;
+    string  brief				=19;
+    string  createTime		    =20;
+    string  legalPerson			=21;
+    string  legalPersonCardId	=22;
+    string  bankUser			=23;
+    string  bankName			=24;
+}
+
+message ReqIdAndStatus{
+    string sellerId = 1;
+    string status =2;
+}
+
+message RespReturn{
+    bool flag = 1;
+    string message = 2;
+}

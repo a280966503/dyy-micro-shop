@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+service ContentCategory{
+
+    rpc Search(ReqContentCategory)returns(RespContentCategory){}
+    rpc Add(ContentCategoryModel)returns(Resp){}
+    rpc Delete(Ids)returns(Resp){}
+    rpc FindOne(ContentCategoryModel)returns(ContentCategoryModel){}
+    rpc FindAll(Req)returns(RespContentCategory){}
+
+}
+
+message Ids{
+    repeated string ids=1;
+}
+
+message ReqContentCategory{
+    int32 page      =1;
+    int32 rows      =2;
+
+}
+
+message RespContentCategory{
+
+    sint64 total = 1;
+
+    repeated ContentCategoryModel rows = 2;
+}
+
+message ContentCategoryModel{
+    sint64 id =1;
+    string name =2;
+}
+
+message Req{}
+message Resp{
+    bool flag = 1;
+    string message = 2;
+}
+
+

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+service Upload{
+    rpc UploadFile(ReqUpload)returns(Resp){}
+
+
+
+}
+
+message ReqUpload{
+    bytes img =1;
+}
+
+message Resp{
+    bool flag = 1;
+    string message = 2;
+}
+
+

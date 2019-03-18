@@ -1,7 +1,7 @@
 package content
 
 import (
-	"dyy-micro-shop/manager-service/proto/content"
+	"dyy-micro-shop/common/proto/content"
 	"fmt"
 	"github.com/astaxie/beego/orm"
 	"golang.org/x/net/context"
@@ -86,5 +86,21 @@ func (h *Content) Update(ctx context.Context, in *content.ContentModel, out *con
 	}
 
 	*out = content.Resp{Flag:true,Message:"修改成功"}
+	return nil
+}
+
+func (h *Content) FindByCategoryId(ctx context.Context, in *content.ContentModel, out *content.RespContent) error {
+
+	var models []*content.ContentModel
+
+	o := orm.NewOrm()
+	_, err := o.Raw("SELECT id,category_id,title,url,pic,status,sort_order FROM tb_content WHERE category_id=?", in.CategoryId).QueryRows(&models)
+
+	if err!=nil {
+		fmt.Println(err)
+		return err
+	}
+
+	*out=content.RespContent{Rows:models}
 	return nil
 }

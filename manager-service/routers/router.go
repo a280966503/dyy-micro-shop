@@ -9,12 +9,13 @@ import (
 	"dyy-micro-shop/manager-service/handler/seller"
 	"dyy-micro-shop/manager-service/handler/specification"
 	"dyy-micro-shop/manager-service/handler/typeTemplate"
+	"dyy-micro-shop/manager-service/handler/upload"
 	"github.com/micro/go-micro/server"
 )
 
 func Init(server server.Server) {
 
-	/**********************brand**********************/
+	/**********************login**********************/
 	server.Handle(server.NewHandler(&brand.Brand{}))
 
 	/**********************content**********************/
@@ -37,6 +38,10 @@ func Init(server server.Server) {
 
 	/**********************typeTemplate**********************/
 	server.Handle(server.NewHandler(&typeTemplate.TypeTemplate{}))
+
+	/**********************upload**********************/
+	server.Handle(server.NewHandler(&upload.Upload{}))
+
 
 
 }

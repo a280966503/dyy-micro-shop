@@ -10,7 +10,7 @@ app.service("uploadService",function($http){
 			method:'post',
 			url:'../upload/uploadFile.do',
 			data:formData,
-			headers:{'Content-Type':undefined} ,// Content-Type : text/html  text/plain
+			headers:{'Content-Type':"multipart/form-data"} ,// Content-Type : text/html  text/plain
 			transformRequest: angular.identity
 		});
 	}

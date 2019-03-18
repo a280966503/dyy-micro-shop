@@ -52,7 +52,7 @@ type TbSpecificationOption struct {
 	Orders     	string `json:"orders"`
 }
 
-/*********************brand************************/
+/*********************login************************/
 type TbBrand struct {
 	Id			int64			`json:"id"`
 	Name 		string		`json:"name"`

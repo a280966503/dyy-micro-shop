@@ -2,7 +2,7 @@
 // source: proto/areas/content.proto
 
 /*
-Package brand is a generated protocol buffer package.
+Package login is a generated protocol buffer package.
 
 It is generated from these files:
 	proto/areas/content.proto
@@ -67,7 +67,7 @@ func NewBrandService(name string, c client.Client) BrandService {
 		c = client.NewClient()
 	}
 	if len(name) == 0 {
-		name = "brand"
+		name = "login"
 	}
 	return &brandService{
 		c:    c,

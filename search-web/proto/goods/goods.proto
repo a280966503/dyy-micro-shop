@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+service Goods{
+
+    rpc Search(ReqSearch)returns(RespSearch){}
+    rpc Delete(Ids)returns(Resp){}
+    rpc UpdateStatus(Ids)returns(Resp){}
+
+
+
+}
+
+message Ids{
+    repeated string ids=1;
+    string status =2;
+}
+
+message ReqSearch{
+    int32 page=1;
+    int32 rows=2;
+}
+
+message RespSearch{
+    sint64 total=1;
+    repeated GoodsModel rows=2;
+}
+
+message GoodsModel{
+    sint64 id =1;
+    string sellerId =2;
+    string goodsName =3;
+    sint64 defaultItemId =4;
+    string auditStatus =5;
+    string isMarketable =6;
+    sint64 brandId =7;
+    string caption =8;
+    sint64 category1Id =9;
+    sint64 category2Id =10;
+    sint64 category3Id =11;
+    string smallPic =12;
+    double price =13;
+    sint64 typeTemplateId =14;
+    string isEnableSpec =15;
+    string isDelete =16;
+}
+
+message Resp{
+    bool flag = 1;
+    string message = 2;
+}
+
+

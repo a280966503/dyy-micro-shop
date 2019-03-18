@@ -6,9 +6,11 @@ import (
 	"dyy-micro-shop/manager-web/handler/contentCategory"
 	"dyy-micro-shop/manager-web/handler/goods"
 	"dyy-micro-shop/manager-web/handler/itemCat"
+	login "dyy-micro-shop/manager-web/handler/login"
 	"dyy-micro-shop/manager-web/handler/seller"
 	"dyy-micro-shop/manager-web/handler/specification"
 	"dyy-micro-shop/manager-web/handler/typeTemplate"
+	"dyy-micro-shop/manager-web/handler/upload"
 	"github.com/micro/go-web"
 	"net/http"
 )
@@ -21,13 +23,13 @@ func Init(service web.Service) {
 	service.Handle("/seller/findOne.do",http.HandlerFunc(seller.FindOne))
 	service.Handle("/seller/updateStatus.do",http.HandlerFunc(seller.UpdateStatus))
 
-	/*-----------------------brand----------------------------*/
-	service.Handle("/brand/search.do",http.HandlerFunc(brand.Search))
-	service.Handle("/brand/save.do",http.HandlerFunc(brand.Save))
-	service.Handle("/brand/findById.do",http.HandlerFunc(brand.FindById))
-	service.Handle("/brand/delete.do",http.HandlerFunc(brand.Delete))
-	service.Handle("/brand/update.do",http.HandlerFunc(brand.Update))
-	service.Handle("/brand/selectOptionList.do",http.HandlerFunc(brand.SelectOptionList))
+	/*-----------------------login----------------------------*/
+	service.Handle("/login/search.do",http.HandlerFunc(brand.Search))
+	service.Handle("/login/save.do",http.HandlerFunc(brand.Save))
+	service.Handle("/login/findById.do",http.HandlerFunc(brand.FindById))
+	service.Handle("/login/delete.do",http.HandlerFunc(brand.Delete))
+	service.Handle("/login/update.do",http.HandlerFunc(brand.Update))
+	service.Handle("/login/selectOptionList.do",http.HandlerFunc(brand.SelectOptionList))
 
 	/*-----------------------specification----------------------------*/
 	service.Handle("/specification/search.do",http.HandlerFunc(specification.Search))
@@ -66,5 +68,12 @@ func Init(service web.Service) {
 	service.Handle("/content/delete.do",http.HandlerFunc(content.Delete))
 	service.Handle("/content/findOne.do",http.HandlerFunc(content.FindOne))
 	service.Handle("/content/update.do",http.HandlerFunc(content.Update))
+
+	/*-----------------------upload----------------------------*/
+	service.Handle("/upload/uploadFile.do",http.HandlerFunc(upload.UploadFile))
+
+
+	/*-----------------------manager----------------------------*/
+	service.Handle("/manager/login",http.HandlerFunc(login.ManagerLogin))
 
 }

@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+service ItemCat{
+
+    //utils.SERVICE_MANAGER_SERVICE
+    rpc FindByParentId(ItemCatModel)returns(ItemCatArr){}
+    //utils.SERVICE_MANAGER_SERVICE
+    rpc FindAll(ItemCatModel)returns(ItemCatArr){}
+
+
+
+}
+
+message ItemCatArr{
+    repeated ItemCatModel itemCats=1;
+}
+
+message ItemCatModel{
+    sint64 id=1;
+    sint64 parentId=2;
+    string name=3;
+    sint64 typeId =4;
+}
+
+message Resp{
+    bool flag = 1;
+    string message = 2;
+}
+
+

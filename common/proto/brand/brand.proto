@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+service Brand{
+    //    rpc MicroSeller(ReqSeller)returns(RespSeller){}
+    rpc Search(ReqBrand)returns(RespBrand){}
+    rpc Save(Rows)returns(Resp){}
+    rpc FindById(Rows)returns(Rows){}
+    rpc Delete(ReqIds)returns(Resp){}
+    rpc Update(Rows)returns(Resp){}
+    rpc SelectOptionList(Req) returns(OptionList){}
+
+
+}
+/**
+--response
+response.rows;//结果
+respons
+--requeste.total;//更新总记录数
+
+seller/search.do?page=1&rows=10
+{status: "0"}
+ */
+message ReqBrand{
+    int32 page      =1;
+    int32 rows      =2;
+    string name     =3;
+    string firstChar =4;
+}
+
+message ReqIds{
+    repeated string ids=1;
+}
+
+//{total:100,rows:[{id:1,name:234,firstChar:N,firstName:2}]}
+message RespBrand{
+
+    sint64 total = 1;
+
+    repeated Rows rows = 2;
+}
+
+
+message OptionList{
+    repeated Model optionList=1;
+}
+
+message Model{
+    sint64 id = 1;
+    string text = 2;
+}
+
+
+
+message Rows{
+    sint64 id =1;
+    string name =2;
+    string firstChar = 3;
+}
+
+message Req{}
+
+message Resp{
+    bool flag = 1;
+    string message = 2;
+}
+
+

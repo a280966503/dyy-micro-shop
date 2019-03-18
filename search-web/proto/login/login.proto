@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+service Login{
+
+    rpc Login(Info)returns(Resp){}
+
+
+
+}
+
+message Info{
+    string username      =1;
+    string password      =2;
+}
+
+message Resp{
+    bool flag=1;
+    string username=2;
+    string token =3;
+    string message=4;
+}
+
+
+
+

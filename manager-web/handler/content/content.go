@@ -1,7 +1,7 @@
 package content
 
 import (
-	"dyy-micro-shop/manager-web/proto/content"
+	"dyy-micro-shop/common/proto/content"
 	"dyy-micro-shop/utils"
 	"encoding/json"
 	"fmt"
@@ -209,3 +209,4 @@ func Update(w http.ResponseWriter,r *http.Request)  {
 	//会写数据
 	w.Write(resp)
 }
+
