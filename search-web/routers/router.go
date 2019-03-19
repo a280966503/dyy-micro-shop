@@ -1,9 +1,8 @@
 package routers
 
 import (
-	"dyy-micro-shop/shop-web/handler/goods"
-	"dyy-micro-shop/shop-web/handler/itemCat"
-	"dyy-micro-shop/shop-web/handler/login"
+	"dyy-micro-shop/search-web/handler/item"
+	"fmt"
 	"github.com/micro/go-web"
 	"net/http"
 )
@@ -12,15 +11,9 @@ func Init(service web.Service) {
 	//service.Handle("/",http.FileServer(http.Dir("views")))
 	service.Handle("/",http.FileServer(http.Dir("views")))
 
-	/*-----------------------login----------------------------*/
-	service.Handle("/shop/login",http.HandlerFunc(login.CheckLogin))
+	fmt.Println("===========================")
 
-	/*-----------------------itemCat----------------------------*/
-	//service.Handle("/itemCat/findOne.do",http.HandlerFunc(itemCat.FindOne))
-	service.Handle("/itemCat/findAll.do",http.HandlerFunc(itemCat.FindAll))
-	service.Handle("/itemCat/findByParentId.do",http.HandlerFunc(itemCat.FindByParentId))
+	/*-----------------------itemsearch----------------------------*/
+	service.Handle("/itemsearch/search.do",http.HandlerFunc(item.Search))
 
-
-	/*-----------------------goods----------------------------*/
-	service.Handle("/goods/search.do",http.HandlerFunc(goods.Search))
 }

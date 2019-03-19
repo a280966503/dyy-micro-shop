@@ -2,7 +2,12 @@ package mongodb
 
 import "gopkg.in/mgo.v2"
 
-const (URL="192.168.32.207:27017")
+const (
+	URL="192.168.32.207:27017"
+	C_ITEM="item"
+)
+
+
 
 func ConnectMongodb() (*mgo.Database,*mgo.Session)  {
 	session, err := mgo.Dial(URL) //连接数据库

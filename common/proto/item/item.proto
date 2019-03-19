@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+service Item{
+    rpc Search(searchParams)returns(respSearch){}
+}
+
+message searchParams{
+    string keywords = 1;
+    string category = 2;
+    string brand = 3;
+    //spec
+    string price = 4;
+    sint64 pageNo = 5;
+    sint64 pageSize = 6;
+    string sort = 7;
+    string sortField = 8;
+
+}
+
+message Model{
+    sint64 id =1;
+    string title =2;
+    string sell_point =3;
+    string price =4;
+    sint64 stock_count =5;
+    sint64 num =6;
+    string barcode =7;
+    string image =8;
+    sint64 categoryId =9;
+    string status =10;
+    string create_time =11;
+    string update_time =12;
+    string item_sn =13;
+    string cost_pirce =14;
+    string market_price =15;
+    string is_default =16;
+    sint64 goods_id =17;
+    string seller_id =18;
+    string cart_thumbnail =19;
+    string category =20;
+    string brand =21;
+    string spec =22;
+    string seller =23;
+}
+
+message respSearch{
+    repeated Model rows=1;
+    sint64 totalPages = 2;
+}
+
+

@@ -15,7 +15,6 @@ type Brand struct {
 func (h *Brand) Search(ctx context.Context, in *brand.ReqBrand, out *brand.RespBrand) error {
 
 
-
 	page := in.Page
 	rows := in.Rows
 
@@ -57,6 +56,9 @@ func (h *Brand) Search(ctx context.Context, in *brand.ReqBrand, out *brand.RespB
 		}
 		out.Rows=append(out.Rows,&brand)
 	}
+
+
+
 	return nil
 }
 

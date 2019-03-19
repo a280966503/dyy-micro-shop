@@ -15,7 +15,7 @@ import (
 
 func Init(server server.Server) {
 
-	/**********************login**********************/
+	/**********************brand**********************/
 	server.Handle(server.NewHandler(&brand.Brand{}))
 
 	/**********************content**********************/
