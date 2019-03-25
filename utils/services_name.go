@@ -15,6 +15,9 @@ const (
 	SERVICE_CART_WEB 		="com.dyy.cart.web"
 	SERVICE_CONTENT_SERVICE		="com.dyy.content.service"
 
+	SERVICE_PAGE_WEB 		="com.dyy.page.web"
+	SERVICE_PAGE_SERVICE		="com.dyy.page.service"
+
 	)
 
 var servicePort = map[string]string{
@@ -24,6 +27,7 @@ var servicePort = map[string]string{
 	SERVICE_SEARCH_WEB		:			":8084",
 	SERVICE_USER_WEB		:			":8085",
 	SERVICE_CART_WEB		:			":8086",
+	SERVICE_PAGE_WEB		:			":8087",
 }
 
 func ServicePort(name string)string  {

@@ -37,7 +37,7 @@ func (h *Item) Search(ctx context.Context, in *item.SearchParams, out *item.Resp
 	}
 
 
-
+//item.RespSearch{Rows:models,TotalPages:int64(count)/in.PageSize+1,Total:int64(count)}
 	*out = item.RespSearch{Rows:models,TotalPages:int64(count)/in.PageSize+1}
 
 	return nil

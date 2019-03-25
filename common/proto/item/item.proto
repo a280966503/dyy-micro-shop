@@ -46,6 +46,7 @@ message Model{
 message respSearch{
     repeated Model rows=1;
     sint64 totalPages = 2;
+    sint64 total = 3;
 }
 
 
